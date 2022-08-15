@@ -30,7 +30,6 @@ PRODUCT_PACKAGES += \
 
 # Alert slider
 PRODUCT_PACKAGES += \
-    KeyHandler \
     tri-state-key-calibrate
 
 # APEX
@@ -155,10 +154,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
-# Doze
-PRODUCT_PACKAGES += \
-    OplusDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -314,6 +309,27 @@ PRODUCT_PACKAGES += \
     OPlusFrameworksResCommon \
     OPlusSettingsResCommon \
     WifiResTarget
+
+# Remove unwanted packages
+PRODUCT_PACKAGES += \
+    RemovePackages
+
+# Oplus Camera
+$(call inherit-product, vendor/oplus/camera/camera-vendor.mk)
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/misc/public.libraries-qti.txt:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/public.libraries-qti.txt \
+    $(LOCAL_PATH)/configs/permissions/com.oplus.camera.unit.sdk.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.oplus.camera.unit.sdk.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-oplus-appplatform.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-oplus-appplatform.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-oplus-camera.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-oplus-camera.xml \
+    $(LOCAL_PATH)/configs/sysconfig/hiddenapi-package-oplus-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hiddenapi-package-oplus-whitelist.xml
+
+# Oplus-fwk
+PRODUCT_PACKAGES += \
+    oplus-fwk.lahaina
+
+PRODUCT_BOOT_JARS += \
+    oplus-fwk.lahaina
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
